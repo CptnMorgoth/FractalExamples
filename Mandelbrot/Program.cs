@@ -10,8 +10,10 @@ namespace Mandelbrot
         static void Main(string[] args)
         {
             string filename = @"C:\Users\Steven\Desktop\Mandelbrot.png";
-            int scale = 1600;
-            int maxIterations = 80;
+            int scale = 300;
+            int maxIterations = 128;
+            bool inverted = true;
+            bool colored = true;
 
             // Dimensions are dimensions 3 x 2
             int width = 3 * scale;
@@ -25,6 +27,7 @@ namespace Mandelbrot
 
             double r_increment = ((double)(r_end - r_start)) / (double)width;
             double i_increment = ((double)(i_end - i_start)) / (double)height;
+            var random = new Random();
 
             using (var bitmap = new Bitmap(width, height))
             {
@@ -34,8 +37,8 @@ namespace Mandelbrot
                         Complex c = new Complex(r, i);
                         int iterations = Mandelbrot(c, maxIterations);
                         int colorVal = 255 * iterations / maxIterations;
+                        colorVal = inverted ? 255 - colorVal : colorVal;
                         bitmap.SetPixel((int)((r - r_start) / 3 * width), (int)((i - i_start) / 2 * height), Color.FromArgb(colorVal, colorVal, colorVal));
-                        
                     }
                 bitmap.Save(filename, ImageFormat.Png);
             }
