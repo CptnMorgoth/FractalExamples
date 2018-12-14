@@ -13,9 +13,8 @@ namespace Mandelbrot
             int scale = 300;
             int maxIterations = 128;
             bool inverted = true;
-            bool colored = true;
 
-            // Dimensions are dimensions 3 x 2
+            // Dimensions are 3 x 2
             int width = 3 * scale;
             int height = 2 * scale;
 
@@ -27,7 +26,6 @@ namespace Mandelbrot
 
             double r_increment = ((double)(r_end - r_start)) / (double)width;
             double i_increment = ((double)(i_end - i_start)) / (double)height;
-            var random = new Random();
 
             using (var bitmap = new Bitmap(width, height))
             {
